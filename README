@@ -1,0 +1,23 @@
+由于MacOS和Tensorflow的版本问题，需要以arm64版本anaconda或miniconda
+可以在https://docs.conda.io/en/latest/miniconda.html下载对应版本的miniconda
+在MacOS上安装Tensorflow可参考Apple官方给出的示例：https://developer.apple.com/metal/tensorflow-plugin/
+运行以下语句：
+conda install -c apple tensorflow-deps==2.9.0
+python -m pip install tensorflow-macos==2.9.0
+python -m pip install tensorflow-metal==0.5.0
+由于版本依赖兼容性问题，tensorflow-deps 2.9.0版本最高只支持2.9.0版本tensorflow-macos和0.5.0版本tensorflow-metal
+
+如果尝试使用GPU在MacOS上进行运算，可以采用如下操作(此操作会使用GPU运算，但不会消除conda给出的警告)：
+前往GitHub下载arm64版本的Miniforge：https://github.com/conda-forge/miniforge/#download
+在终端运行以下语句以安装：
+chmod +x ~/Downloads/Miniforge3-MacOSX-arm64.sh
+sh ~/Downloads/Miniforge3-MacOSX-arm64.sh
+索引miniforge3的位置，其可能情况有如下两种
+source /Applications/Software/miniforge3/bin/activate
+source miniforge3/bin/activate
+创建GPU环境
+conda create -n tensorflow-gpu pip python=3.9
+开启GPU环境
+conda activate tensorflow-gpu
+关闭GPU环境
+conda deactivate
